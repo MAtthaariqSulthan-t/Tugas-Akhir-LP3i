@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DevisiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,5 @@ Route::get('/list', function () {
 Route::get('/admin', function () {
     return view('admin.pages.dashboard');
 });
-Route::get('/admindevisi', function () {
-    return view('admin.pages.devisis.list');
-});
+// Route::get('/devisi', [DevisiController::class, 'index'])->name('devisi');
+Route::resource('devisi', DevisiController::class);

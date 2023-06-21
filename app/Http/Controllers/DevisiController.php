@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Devisi;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class DevisiController extends Controller
 {
@@ -12,7 +13,8 @@ class DevisiController extends Controller
      */
     public function index()
     {
-        //
+        $data = Devisi::all();
+        return view('admin.pages.devisis.list', compact('data'));
     }
 
     /**
@@ -20,15 +22,22 @@ class DevisiController extends Controller
      */
     public function create()
     {
-        //
+        $devisi = new Devisi;
+        return view('admin.pages.devisis.form', compact('devisi'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'devisi' => 'required',
+            'code' => 'required',
+        ]);
+
+        Devisi::create($request->all());
+        return redirect()->route('devisi.index')->with('success', 'data berhasil ditambahakan');
     }
 
     /**
@@ -44,7 +53,7 @@ class DevisiController extends Controller
      */
     public function edit(Devisi $devisi)
     {
-        //
+        return view('admin.pages.devisis.form', ['devisi' => $devisi]);
     }
 
     /**
@@ -52,7 +61,9 @@ class DevisiController extends Controller
      */
     public function update(Request $request, Devisi $devisi)
     {
-        //
+        $data = $request->all();
+        $devisi->update($data);
+        return redirect()->route('devisi.index')->with('success', 'data berhasil diubah');
     }
 
     /**
@@ -60,6 +71,8 @@ class DevisiController extends Controller
      */
     public function destroy(Devisi $devisi)
     {
-        //
+        $data = $devisi->all();
+        $devisi->delete($data);
+        return redirect()->route('devisi.index')->with('success', 'data berhasil di hapus');
     }
 }

@@ -15,37 +15,56 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                {{-- <a href="{{ route('major.create') }}" class="btn btn-facebook">.add data</a> --}}
+                <a href="{{ route('devisi.create') }}" class="btn btn-facebook">.add data</a>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success mt-1" role="alert">
+                        {{$message}}
+                    </div>
+                @endif
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>code</th>
                             <th>devisi</th>
+                            <th>status</th>
                             <th>action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Id</th>
+                            <th>code</th>
                             <th>devisi</th>
+                            <th>status</th>
                             <th>action</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        {{-- @foreach ($data as $item) --}}
-                        {{-- <tr> --}}
-                            {{-- <td>{{ $loop->iteration }}</td> --}}
-                            {{-- <td>{{ $item->name }}</td> --}}
-                            {{-- <td> --}}
-                                {{-- <form action="{{ route('product.destroy',['product'=>$item->id]) }}" method="post"> --}}
-                                    {{-- <button type="submit" class="btn btn-google">.delete</button> --}}
-                                    {{-- @method('delete') --}}
-                                    {{-- @csrf --}}
-                                {{-- </form> --}}
-                                {{-- <a href="#" class="btn btn-facebook">.edit</a> --}}
-                            {{-- </td> --}}
-                        {{-- </tr> --}}
-                        {{-- @endforeach --}}
+                        @foreach ($data as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->code }}</td>
+                            <td>{{ $item->devisi }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>
+                                <div class="container">
+                                    <div class="row">
+                                        <div>
+                                            <form action="{{ route('devisi.destroy',['devisi'=>$item->id]) }}" method="post">
+                                                <button type="submit" class="btn btn-google">.delete</button>
+                                                @method('delete')
+                                                @csrf
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('devisi.edit', [$devisi = $item->id]) }}" class="btn btn-facebook">.edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

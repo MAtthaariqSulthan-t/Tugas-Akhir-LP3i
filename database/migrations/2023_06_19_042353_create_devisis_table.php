@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('devisis', function (Blueprint $table) {
             $table->id();
+            $table->string('devisi', 50);
+            $table->integer('code');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }
