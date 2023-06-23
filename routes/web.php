@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DevisiController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::get('/admin', function () {
 });
 // Route::get('/devisi', [DevisiController::class, 'index'])->name('devisi');
 Route::resource('devisi', DevisiController::class);
+Route::resource('service', ServiceController::class);

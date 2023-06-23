@@ -33,8 +33,8 @@
                   4.  Masuk ke halaman list layanan untuk melihat daftar layanan anda
                 </p>
               </div>
-              <a href="layanan" type="submit" class="btn btn-primary bg-gradient">Buat Layanan</a>
-              <a href="list" type="submit" class="btn btn-warning bg-gradient">List Layanan</a>
+              <a href="{{ route('service.create') }}" type="submit" class="btn btn-primary bg-gradient">Buat Layanan</a>
+              <a href="{{ route('service.index') }}" type="submit" class="btn btn-warning bg-gradient">List Layanan</a>
             </form>
           </div>
           <div class="col-md-4"></div>

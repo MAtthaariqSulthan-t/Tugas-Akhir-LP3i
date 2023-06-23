@@ -19,7 +19,7 @@
         </div>
       </div>
       <!-- content form-->
-      <div class="container mt-5 pb-5 mb-2 bg bg-dark">
+      <div class="container mt-5 pb-5 mb-2 bg bg-dark table-responsive ">
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10 text-light mt-3">
@@ -27,89 +27,89 @@
               <thead>
                 <tr>
                   <th scope="col">No Layanan</th>
-                  <th scope="col">Jenis Perangkat</th>
-                  <th scope="col">Deskripsi Permasalahan</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Perangkat</th>
+                  <th scope="col">Deskripsi</th>
+                  <th scope="col">Lokasi</th>
                   <th scope="col">Status</th>
                   <th scope="col">Waktu Pengajuan</th>
                   <th scope="col">Edit</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($data as $row)
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>
-                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm rounded-pill bg-gradient">Ubah Status</button>
-                  </td>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $row->id }}</td>
+                    <td>{{ $row->device }}</td>
+                    <td>{{ $row->description }}</td>
+                    <td>{{ $row->location }}</td>
+                    <td>{{ $row->status }}</td>
+                    <td>{{ $row->created_at->format( 'd M Y | h:m:s') }}</td>
+                    <td>
+                      <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $row->id }}" class="btn btn-warning btn-sm rounded-pill bg-gradient">Ubah Status</button>
+                    </td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                  <td>
-                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm rounded-pill bg-gradient ">Ubah Status</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                  <td>
-                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm rounded-pill bg-gradient">Ubah Status</button>
-                  </td>
-                </tr>
+                <!-- Modal form status -->
+                <div class="modal fade" id="exampleModal{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form action="{{ route('service.update', ['service' => $row->id]) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Edit Status</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark">
+                                <div class="md-3">
+                                    <label for="exampleInputPassword1" class="form-label">User</label>
+                                    <input type="text" class="form-control" value="{{ $row->id }}" disabled>
+                                </div>
+                                <div class="md-5">
+                                    <label for="exampleInputPassword1" class="form-label">Perangkat</label>
+                                    <input type="text" class="form-control" value="{{ $row->device }}" disabled>
+                                </div>
+                                <div class="md-5">
+                                    <label for="exampleInputPassword1" class="form-label">Status</label>
+                                    <select name="status" id="" class="form-select">
+                                      <option value="penting" {{ $row->status == 'penting' ? 'selected' : ''}}>Urgent</option>
+                                      <option value="sedang" {{ $row->status == 'sedang' ? 'selected' : ''}}>Average</option>
+                                      <option value="batal" {{ $row->status == 'batal' ? 'selected' : ''}}>batalkan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" data-bs-toggle="modal" data-bs-target="#editmodal{{ $row->id }}"  class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                <!-- modal edit status -->
+                    <div class="modal fade text-dark" id="editmodal{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Status</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Apa anda yakin ingin mengubah status?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                @endforeach
               </tbody>
             </table>
           </div>
           <div class="col-md-1"></div>
-        </div>
-      </div>
-    <!-- modal -->
-    <!-- Modal form status -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Status</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <label for="exampleInputPassword1" class="form-label">Status</label>
-              <select name="" id="" class="form-select">
-                <option value="">Urgent</option>
-                <option value="">Average</option>
-                <option value="">Anytime</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- modal edit status -->
-      <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Status</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Apa anda yakin ingin mengubah status?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
       </div>
 @endsection
