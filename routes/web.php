@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DevisiController;
+use App\Http\Controllers\LogrequestController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ServiceController;
 
 /*
@@ -31,3 +33,7 @@ Route::get('/admin', function () {
 // Route::get('/devisi', [DevisiController::class, 'index'])->name('devisi');
 Route::resource('devisi', DevisiController::class);
 Route::resource('service', ServiceController::class);
+Route::resource('request', RequestController::class);
+Route::resource('logrequest', LogrequestController::class);
+// Route::get('service/adminservice', [ServiceController::class, 'adminservice'])->name('service.adminservice');
+// Route::get('service/webnotif', [ServiceController::class, 'webnotif'])->name('service.webnotif');

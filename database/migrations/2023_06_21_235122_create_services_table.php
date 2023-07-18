@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('device');
             $table->string('description');
             $table->string('location');
-            $table->enum('status', ['Proses', 'selesai', 'batal', 'penting', 'sedang']);
+            $table->enum('status', ['batal', 'penting', 'sedang']);
+            $table->enum('action', ['req', 'proses', 'selesai']);
             $table->timestamps();
         });
     }

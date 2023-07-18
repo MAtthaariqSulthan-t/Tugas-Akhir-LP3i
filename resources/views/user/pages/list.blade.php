@@ -40,14 +40,20 @@
                 @foreach ($data as $row)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $row->id }}</td>
+                    <td>{{ $row->user }}</td>
                     <td>{{ $row->device }}</td>
                     <td>{{ $row->description }}</td>
                     <td>{{ $row->location }}</td>
                     <td>{{ $row->status }}</td>
                     <td>{{ $row->created_at->format( 'd M Y | h:m:s') }}</td>
                     <td>
-                      <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $row->id }}" class="btn btn-warning btn-sm rounded-pill bg-gradient">Ubah Status</button>
+                        @if ($row->action == 'proses')
+                        <button class="btn btn-success btn-sm rounded-pill bg-gradient disabled">Diproses</button>
+                        @elseif ($row->action == 'selesai')
+                        <button class="btn btn-warning btn-sm rounded-pill bg-gradient disabled">Selesai</button>
+                        @else
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $row->id }}" class="btn btn-warning btn-sm rounded-pill bg-gradient">Ubah Status</button>
+                        @endif
                     </td>
                 </tr>
                 <!-- Modal form status -->

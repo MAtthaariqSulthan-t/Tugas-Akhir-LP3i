@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AdminNotification;
 use App\Models\Service;
 use App\Models\UserTest;
 use Illuminate\Http\Request;
@@ -13,8 +14,15 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $data = Service::all();
+        $data = Service::orderBy('created_at', 'desc')->get();
         return view('user.pages.list', compact('data'));
+    }
+    // admin index
+    public function adminservice()
+    {
+        $data = Service::all();
+        dd($data);
+        return view('admin.pages.requests.list', compact('data'));
     }
 
     /**
@@ -24,6 +32,7 @@ class ServiceController extends Controller
     {
         $data = UserTest::all();
         $service = new Service;
+
         return view('user.pages.layanan', compact('data', 'service'));
     }
 
@@ -34,6 +43,11 @@ class ServiceController extends Controller
     {
         Service::create($request->all());
         return redirect()->route('service.index')->with('notif', 'permintaan berhasil terkirim');
+    }
+
+    public function webnotif()
+    {
+        event(new AdminNotification('New Request'));
     }
 
     /**

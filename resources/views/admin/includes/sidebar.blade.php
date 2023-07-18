@@ -27,14 +27,19 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-
-    <li class="nav-item active">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item {{ request()->is('request*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('request.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Request</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('logrequest*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('logrequest.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Log Request</span></a>
+    </li>
+
+    <li class="nav-item {{ request()->is('devisi*') ? 'active' : '' }}">
         <a class="nav-link"  href="{{ route('devisi.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Devisi</span></a>
