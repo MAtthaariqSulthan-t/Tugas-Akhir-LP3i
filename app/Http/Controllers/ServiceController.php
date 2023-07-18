@@ -6,6 +6,7 @@ use App\Events\AdminNotification;
 use App\Models\Service;
 use App\Models\UserTest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $data = Service::orderBy('created_at', 'desc')->get();
+        $userId = Auth::id();
+        $data = Service::where('user', $userId)->orderBy('created_at', 'desc')->get();
         return view('user.pages.list', compact('data'));
     }
     // admin index

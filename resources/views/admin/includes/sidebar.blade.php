@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="/admin">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -45,8 +45,8 @@
             <span>Devisi</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
+        <a class="nav-link"  href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>User</span></a>
     </li>

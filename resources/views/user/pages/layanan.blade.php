@@ -13,11 +13,9 @@
             {{-- <h5 class="card-title">Nama User :</h5> --}}
             {{-- <p class="card-text">Devisi : IT</p> --}}
             <form action="{{ route('service.store') }}" method="POST">
-                <select name="user" id="" class="form-select">
-                    @foreach ($data as $item)
-                        <option value="{{ $item->id }}">{{ $item->id }}</option>
-                    @endforeach
-                </select>
+                    <input type="text" name="user" value="{{ Auth::user()->id }}" hidden>
+                    <h5 class="card-title">Username : {{ Auth::user()->name }}</h5>
+                    <p class="card-text">Devisi : IT</p>
             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModa2" class="btn btn-primary bg-gradient">Logout</a>
           </div>
         </div>

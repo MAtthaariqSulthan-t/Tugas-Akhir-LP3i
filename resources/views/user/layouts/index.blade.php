@@ -26,7 +26,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary">Yo</button>
+          <a href="/logout" class="btn btn-primary">Yo</a>
         </div>
       </div>
     </div>

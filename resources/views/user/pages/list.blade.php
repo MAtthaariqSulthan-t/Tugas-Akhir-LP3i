@@ -10,7 +10,7 @@
           <div class="col-md-4 pt-4">
             <div class="card w-100 h-100">
               <div class="card-body">
-                <h5 class="card-title">Nama User</h5>
+                <h5 class="card-title">Username : {{ Auth::user()->name }}</h5>
                 <p class="card-text">Devisi : IT</p>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModa2" class="btn btn-primary">Logout</a>
               </div>
@@ -70,7 +70,7 @@
                             <div class="modal-body text-dark">
                                 <div class="md-3">
                                     <label for="exampleInputPassword1" class="form-label">User</label>
-                                    <input type="text" class="form-control" value="{{ $row->id }}" disabled>
+                                    <input type="text" class="form-control" value="{{ Auth::user()->id }}" disabled>
                                 </div>
                                 <div class="md-5">
                                     <label for="exampleInputPassword1" class="form-label">Perangkat</label>

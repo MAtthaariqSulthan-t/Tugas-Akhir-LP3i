@@ -8,7 +8,7 @@
           <div class="col-md-4 pt-4">
             <div class="card w-100 h-100">
               <div class="card-body">
-                <h5 class="card-title">Nama User</h5>
+                <h5 class="card-title">Username : {{ Auth::user()->name }}</h5>
                 <p class="card-text">Devisi : IT</p>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModa2" class="btn btn-primary bg-gradient">Logout</a>
               </div>
