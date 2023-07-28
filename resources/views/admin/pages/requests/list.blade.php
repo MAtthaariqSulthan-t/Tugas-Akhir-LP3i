@@ -8,6 +8,7 @@
     <a class="btn btn-primary mb-2 {{ $fill == 'all' ? 'active' : '' }}" href="{{ route('logrequest.index') }}" >All</a>
     <a class="btn btn-primary mb-2 {{ $fill == 'proses' ? 'active' : '' }}" href="{{ route('logrequest.create', ['logrequest' => 1]) }}" >Proses</a>
     <a class="btn btn-primary mb-2 {{ $fill == 'selesai' ? 'active' : '' }}" href="{{ route('logrequest.edit', ['logrequest' => 2]) }}" >Selesai</a>
+    <a class="btn btn-danger mb-2" href="/export-pdf" >Export</a>
     @endif
 
     <!-- DataTales Example -->

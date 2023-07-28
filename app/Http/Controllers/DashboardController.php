@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -70,5 +72,12 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    //export function
+    public function exportPdf()
+    {
+        $datas = Service::all();
+        $pdf = Pdf::loadView('pdf.export-dataLaba', ['datas' => $datas]);
+        return $pdf->download('dataLayananBantuan.pdf' . Carbon::now()->timestamp . '.pdf');
     }
 }

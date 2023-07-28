@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +14,12 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $data = Service::where('action', 'proses')
+        $data = Service::with('user')
+            ->where('action', 'proses')
             ->orWhere('action', 'req')
             ->orderBy('created_at', 'desc')
             ->get();
+        // dd($data);
         $name = 'request';
         return view('admin.pages.requests.list', compact('data', 'name'));
     }

@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     //admin
     Route::get('/admin', [DashboardController::class, 'index'])->middleware('userAkses:admin');
+    Route::get('/export-pdf', [DashboardController::class, 'exportPdf'])->middleware('userAkses:admin');
     Route::resource('devisi', DevisiController::class)->middleware('userAkses:admin');
     Route::resource('request', RequestController::class)->middleware('userAkses:admin');
     Route::resource('logrequest', LogrequestController::class)->middleware('userAkses:admin');
